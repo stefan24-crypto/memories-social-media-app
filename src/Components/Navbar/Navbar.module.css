@@ -1,0 +1,36 @@
+.nav {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo h1 {
+  margin-left: 1rem;
+}
+
+.logo__img {
+  max-width: 50px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  min-width: 200px;
+  max-width: 300px;
+  justify-content: space-between;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.activated {
+  color: yellow;
+}

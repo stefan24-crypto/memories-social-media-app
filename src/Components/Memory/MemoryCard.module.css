@@ -1,0 +1,95 @@
+.card {
+  width: 100%;
+  background-color: var(--form-bg);
+  color: black;
+  border-radius: 0.5rem;
+  max-height: 500px;
+}
+
+.image_div {
+  height: 250px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.creator_and_edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  padding-top: 1.7rem;
+  padding-bottom: 0.2rem;
+}
+
+.edit {
+  cursor: pointer;
+}
+
+.overlay {
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.time {
+  padding: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.tags {
+  display: flex;
+  font-size: 0.9rem;
+  padding: 1rem;
+  color: gray;
+}
+.tag {
+  margin-left: 0.3rem;
+}
+
+.title {
+  padding: 0 1rem;
+}
+
+.title h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+}
+.message {
+  padding: 1rem;
+  font-size: 0.9rem;
+  /* color: rgb(56, 56, 56); */
+  color: rgba(255, 255, 255, 0.719);
+}
+
+.likes_and_comments {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.719);
+}
+
+.comment {
+  margin-left: 0.5rem;
+}
+
+.delete {
+  color: rgba(255, 0, 0, 0.733);
+}
+.delete:hover {
+  cursor: pointer;
+}
+
+.likes {
+  display: flex;
+}
+.likes p {
+  font-weight: 300;
+}
+.likes:hover {
+  cursor: pointer;
+}
