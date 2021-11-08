@@ -1,16 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./MemoryDetail.module.css";
 import Tag from "./Tag";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import moment from "moment";
 import Comment from "./Comment";
 import { TextField } from "@mui/material";
+import { dataActions } from "../../store/data-slice";
 
 const MemoryDetail = ({ id }) => {
+  const [comment, setComment] = useState("");
   const memories = useSelector((state) => state.data.memories);
+  const dispatch = useDispatch();
   const thisMemory = memories.find((each) => each.id === id);
   if (!thisMemory) return <h1>No Memory</h1>;
+  const commentChange = (e) => setComment(e.target.value);
+
+  const addCommentHandler = (e) => {
+    e.preventDefault();
+    dispatch(dataActions.addComment({ id: id, comment: comment }));
+  };
+  console.log(thisMemory.comments);
+
+  //   const theComments = thisMemory.comments.map((each) => (
+  //     <Comment content={each.text} id={each.id} />
+  //   ));
+
   return (
     <section className={classes.page}>
       <header
@@ -43,12 +58,13 @@ const MemoryDetail = ({ id }) => {
         <div>
           <h1>Add Comment</h1>
         </div>
-        <form className={classes.comment__input}>
+        <form className={classes.comment__input} onSubmit={addCommentHandler}>
           <TextField
             fullWidth
             id="outlined-basic"
             label="Comment"
             variant="filled"
+            onChange={commentChange}
           />
         </form>
         <div className={classes.comments}>

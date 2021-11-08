@@ -19,6 +19,16 @@ const dataSlice = createSlice({
     addMemory(state, action) {
       state.memories.unshift(action.payload);
     },
+    addComment(state, action) {
+      const memory = state.memories.find(
+        (each) => each.id === action.payload.id
+      );
+      const data = {
+        id: Math.random().toString(),
+        text: action.payload.comment,
+      };
+      memory.comments.unshift(data);
+    },
   },
 });
 
