@@ -1,9 +1,10 @@
 import React from "react";
 import { useParams } from "react-router";
+import MemoryDetail from "../Components/Memory/MemoryDetail";
 
-const MemoryDetail = () => {
+const MemoryDetailPage = () => {
   const params = useParams();
-  return <h1>Memory Detail Page for {params.memoryID}!!!</h1>;
+  return <MemoryDetail id={params.memoryID} />;
 };
 
-export default MemoryDetail;
+export default MemoryDetailPage;

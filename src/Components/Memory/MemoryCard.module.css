@@ -3,7 +3,8 @@
   background-color: var(--form-bg);
   color: black;
   border-radius: 0.5rem;
-  max-height: 500px;
+  max-height: 450px;
+  overflow-y: auto;
 }
 
 .image_div {
@@ -46,9 +47,6 @@
   padding: 1rem;
   color: gray;
 }
-.tag {
-  margin-left: 0.3rem;
-}
 
 .title {
   padding: 0 1rem;
@@ -66,7 +64,7 @@
   color: rgba(255, 255, 255, 0.719);
 }
 
-.likes_and_comments {
+.likes_and_comments_and_delete {
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -75,21 +73,46 @@
 
 .comment {
   margin-left: 0.5rem;
+  transition: 200ms ease-in;
+  display: flex;
+}
+.comment p {
+  margin-left: 0.1rem;
+}
+
+.comment:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .delete {
   color: rgba(255, 0, 0, 0.733);
+  transition: 200ms ease-in;
 }
 .delete:hover {
   cursor: pointer;
+  transform: scale(1.1);
+}
+
+.likes_and_comments {
+  display: flex;
 }
 
 .likes {
   display: flex;
+  transition: 200ms ease-in;
 }
 .likes p {
   font-weight: 300;
 }
+
 .likes:hover {
   cursor: pointer;
+  transform: scale(1.1);
+}
+
+.content {
+  max-height: 250px;
+  /* background: blue; */
+  overflow-y: auto;
 }

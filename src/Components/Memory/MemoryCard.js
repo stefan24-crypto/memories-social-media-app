@@ -4,6 +4,12 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CommentIcon from "@mui/icons-material/Comment";
+import { useDispatch } from "react-redux";
+import { dataActions } from "../../store/data-slice";
+import moment from "moment";
+import { useNavigate } from "react-router";
+import Tag from "./Tag";
+
 const MemoryCard = ({
   image,
   title,
@@ -12,7 +18,23 @@ const MemoryCard = ({
   tags,
   creator,
   time,
+  id,
+  numOfComments,
 }) => {
+  const shorten = (str) => {
+    return `${str.slice(0, 140)}...`;
+  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const likeHandler = () => {
+    dispatch(dataActions.addLike(id));
+  };
+  const deleteHandler = () => {
+    dispatch(dataActions.deleteMemory(id));
+  };
+  const goToDetailPage = () => {
+    navigate(`/${id}`);
+  };
   return (
     <div className={classes.card}>
       <div
@@ -24,12 +46,10 @@ const MemoryCard = ({
         <div className={classes.overlay}>
           <div className={classes.creator_and_edit}>
             <h1>{creator}</h1>
-            <div className={classes.edit}>
-              <MoreHorizIcon />
-            </div>
+            <div className={classes.edit}>{/* <MoreHorizIcon /> */}</div>
           </div>
           <div className={classes.time}>
-            <p>{time}</p>
+            <p>{moment(time).fromNow()}</p>
           </div>
         </div>
       </div>
@@ -37,24 +57,27 @@ const MemoryCard = ({
       <div className={classes.content}>
         <div className={classes.tags}>
           {tags.map((each) => {
-            return <p className={classes.tag}>#{each}</p>;
+            return <Tag content={each} />;
           })}
         </div>
         <div className={classes.title}>
           <h1>{title}</h1>
         </div>
         <div className={classes.message}>
-          <p>{message}</p>
+          <p>{message.length > 150 ? shorten(message) : message}</p>
         </div>
-        <div className={classes.likes_and_comments}>
-          <div className={classes.likes}>
-            <ThumbUpAltIcon />
-            <p>{numOfLikes}</p>
-            <div className={classes.comment}>
+        <div className={classes.likes_and_comments_and_delete}>
+          <div className={classes.likes_and_comments}>
+            <div className={classes.likes} onClick={likeHandler}>
+              <ThumbUpAltIcon />
+              <p>{numOfLikes}</p>
+            </div>
+            <div className={classes.comment} onClick={goToDetailPage}>
               <CommentIcon />
+              <p>{numOfComments}</p>
             </div>
           </div>
-          <div className={classes.delete}>
+          <div className={classes.delete} onClick={deleteHandler}>
             <DeleteIcon />
           </div>
         </div>
@@ -64,21 +87,3 @@ const MemoryCard = ({
 };
 
 export default MemoryCard;
-
-{
-  /* <div className={classes.creator_and_edit}>
-        <p>{creator}</p>
-        <p>...</p>
-    </div>
-    <div className={classes.time}>
-        <p>{time}</p>
-    </div> */
-}
-
-// className={classes.image_div}
-// style={{
-//   backgroundImage: `url(${image})`,
-//   backgroundRepeat: "no-repeat",
-//   backgroundPosition: "center center",
-//   backgroudSize: "contain",
-// }}
