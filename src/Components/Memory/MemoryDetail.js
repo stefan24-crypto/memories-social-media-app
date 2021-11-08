@@ -4,6 +4,8 @@ import classes from "./MemoryDetail.module.css";
 import Tag from "./Tag";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import moment from "moment";
+import Comment from "./Comment";
+import { TextField } from "@mui/material";
 
 const MemoryDetail = ({ id }) => {
   const memories = useSelector((state) => state.data.memories);
@@ -37,6 +39,24 @@ const MemoryDetail = ({ id }) => {
           <p>{thisMemory.message}</p>
         </div>
       </main>
+      <footer className={classes.comment__section}>
+        <div>
+          <h1>Add Comment</h1>
+        </div>
+        <form className={classes.comment__input}>
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Comment"
+            variant="filled"
+          />
+        </form>
+        <div className={classes.comments}>
+          {thisMemory.comments.map((each) => (
+            <Comment content={each.text} id={each.id} />
+          ))}
+        </div>
+      </footer>
     </section>
   );
 };
