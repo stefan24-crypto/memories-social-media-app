@@ -56,9 +56,9 @@ const MemoryDetail = ({ id }) => {
           </div>
         </main>
         <footer className={classes.comment__section}>
-          <div className={classes.addComment__heading}>
-            <h1>Add Comment</h1>
-          </div>
+          {/* <div className={classes.addComment__heading}>
+            <h1>Comments</h1>
+          </div> */}
           <form className={classes.comment__input} onSubmit={addCommentHandler}>
             <TextField
               fullWidth
