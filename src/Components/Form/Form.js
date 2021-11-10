@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import classes from "./Form.module.css";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { dataActions } from "../../store/data-slice";
 
 const Form = () => {
+  //Use useReducer Instead
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");

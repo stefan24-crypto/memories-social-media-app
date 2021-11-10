@@ -21,6 +21,7 @@ const MemoryCard = ({
   id,
   numOfComments,
 }) => {
+  //Functions
   const shorten = (str) => {
     return `${str.slice(0, 140)}...`;
   };
@@ -35,6 +36,7 @@ const MemoryCard = ({
   const goToDetailPage = () => {
     navigate(`/${id}`);
   };
+
   return (
     <div className={classes.card}>
       <div
@@ -46,7 +48,9 @@ const MemoryCard = ({
         <div className={classes.overlay}>
           <div className={classes.creator_and_edit}>
             <h1>{creator}</h1>
-            <div className={classes.edit}>{/* <MoreHorizIcon /> */}</div>
+            <div className={classes.edit}>
+              <MoreHorizIcon />
+            </div>
           </div>
           <div className={classes.time}>
             <p>{moment(time).fromNow()}</p>
@@ -57,7 +61,7 @@ const MemoryCard = ({
       <div className={classes.content}>
         <div className={classes.tags}>
           {tags.map((each) => {
-            return <Tag content={each} />;
+            return <Tag content={each} key={Math.random().toString()} />;
           })}
         </div>
         <div className={classes.title}>

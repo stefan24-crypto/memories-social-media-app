@@ -29,6 +29,7 @@ const dataSlice = createSlice({
       };
       memory.comments.unshift(data);
     },
+    deleteComment(state, action) {},
   },
 });
 
