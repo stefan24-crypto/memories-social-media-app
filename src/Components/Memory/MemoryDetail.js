@@ -91,7 +91,12 @@ const MemoryDetail = ({ id }) => {
           ) : (
             <div className={classes.comments}>
               {thisMemory.comments.map((each) => (
-                <Comment content={each.text} id={each.id} key={each.id} />
+                <Comment
+                  content={each.text}
+                  id={each.id}
+                  key={each.id}
+                  curMemory={thisMemory}
+                />
               ))}
             </div>
           )}

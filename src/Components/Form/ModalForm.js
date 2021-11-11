@@ -61,6 +61,10 @@ const ModalForm = ({
     await updateDoc(userDoc, newFileds);
     stopShowModal();
   };
+
+  const closeModalHandler = () => {
+    stopShowModal();
+  };
   return (
     <Fragment>
       <Overlay onClick={stopShowModal}></Overlay>
@@ -110,6 +114,7 @@ const ModalForm = ({
             type="button"
             className={classes["button-30"]}
             id={classes.btn1}
+            onClick={closeModalHandler}
           >
             Cancel
           </button>

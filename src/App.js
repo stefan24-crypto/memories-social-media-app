@@ -10,9 +10,6 @@ import { dataActions } from "./store/data-slice";
 import { db } from "./firebase";
 import { collection, getDocs, onSnapshot } from "@firebase/firestore";
 
-//Add Error Handling
-// Add Loading Spinner
-
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {

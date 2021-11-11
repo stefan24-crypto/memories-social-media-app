@@ -6,3 +6,12 @@
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
+
+.del {
+  transition: 200ms ease-in-out;
+}
+
+.del:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
