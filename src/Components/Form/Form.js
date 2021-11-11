@@ -8,6 +8,7 @@ import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../../firebase";
 
 const Form = () => {
+  //Add Error Handling :)
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -29,8 +30,28 @@ const Form = () => {
   const cancelHandler = () => {
     navigate("/");
   };
+
+  //Submit Function
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (
+      title.length === 0 ||
+      message.length === 0 ||
+      image.length === 0 ||
+      creator.length === 0 ||
+      tags.length === 0
+    ) {
+      alert("Please fill out all fields");
+      return;
+    }
+    if (
+      !image.includes(".jpg") &&
+      !image.includes(".png") &&
+      !image.includes(".jpeg")
+    ) {
+      alert("Please enter image ending with(jpg, png or jpeg)");
+      return;
+    }
     const data = {
       id: Math.random().toString(),
       title: title,

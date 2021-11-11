@@ -27,6 +27,24 @@ const ModalForm = ({
   const submitUpdatedDataHandler = async (e) => {
     e.preventDefault();
     const tags = tagsRef.current.value.split(",");
+    if (
+      titleRef.current.value.length === 0 ||
+      messageRef.current.value.length === 0 ||
+      imageRef.current.value.length === 0 ||
+      creatorRef.current.value.length === 0 ||
+      tagsRef.current.value.length === 0
+    ) {
+      alert("Please fill out all fields");
+      return;
+    }
+    if (
+      !imageRef.current.value.includes(".jpg") &&
+      !imageRef.current.value.includes(".png") &&
+      !imageRef.current.value.includes(".jpeg")
+    ) {
+      alert("Please enter image ending with(jpg, png or jpeg)");
+      return;
+    }
     const data = {
       id: Math.random().toString(),
       title: titleRef.current.value,

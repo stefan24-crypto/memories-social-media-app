@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router";
 import HomePage from "./Pages/HomePage";
@@ -15,7 +15,6 @@ import { collection, getDocs, onSnapshot } from "@firebase/firestore";
 
 const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     onSnapshot(collection(db, "memories"), (snapshot) =>
       snapshot.docs.map((doc) =>
