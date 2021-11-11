@@ -73,6 +73,11 @@
   transform: scale(1.1);
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
 .comment__section {
   display: flex;
   flex-direction: column;

@@ -9,10 +9,13 @@ import { TextField } from "@mui/material";
 import { dataActions } from "../../store/data-slice";
 import { db } from "../../firebase";
 import { doc, updateDoc } from "@firebase/firestore";
+// import Spinner from "react-bootstrap/Spinner";
+import Loader from "react-loader-spinner";
 
 const MemoryDetail = ({ id }) => {
   //Variables Needed
   const [comment, setComment] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
   const memories = useSelector((state) => state.data.memories);
   const thisMemory = memories.find((each) => each.id === id);
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ const MemoryDetail = ({ id }) => {
 
   const addCommentHandler = async (e) => {
     e.preventDefault();
+    setShowSpinner(true);
     const userDoc = doc(db, "memories", id);
     const newFields = {
       comments: [
@@ -31,6 +35,7 @@ const MemoryDetail = ({ id }) => {
       ],
     };
     await updateDoc(userDoc, newFields);
+    setShowSpinner(false);
     setComment("");
   };
   const addLikeHandler = async () => {
@@ -67,10 +72,8 @@ const MemoryDetail = ({ id }) => {
             <p>{thisMemory.message}</p>
           </div>
         </main>
+
         <footer className={classes.comment__section}>
-          {/* <div className={classes.addComment__heading}>
-            <h1>Comments</h1>
-          </div> */}
           <form className={classes.comment__input} onSubmit={addCommentHandler}>
             <TextField
               fullWidth
@@ -81,11 +84,17 @@ const MemoryDetail = ({ id }) => {
               value={comment}
             />
           </form>
-          <div className={classes.comments}>
-            {thisMemory.comments.map((each) => (
-              <Comment content={each.text} id={each.id} key={each.id} />
-            ))}
-          </div>
+          {showSpinner ? (
+            <div className={classes.spinner}>
+              <Loader color="#FFF" height={50} width={50} type="ThreeDots" />
+            </div>
+          ) : (
+            <div className={classes.comments}>
+              {thisMemory.comments.map((each) => (
+                <Comment content={each.text} id={each.id} key={each.id} />
+              ))}
+            </div>
+          )}
         </footer>
       </div>
     </section>
