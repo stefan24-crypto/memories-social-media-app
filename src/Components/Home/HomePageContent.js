@@ -5,9 +5,14 @@ import classes from "./HomePageContent.module.css";
 
 const HomePageContent = () => {
   const memories = useSelector((state) => state.data.memories);
+  const copyofMemories = [...memories];
+  copyofMemories.sort((a, b) => {
+    if (a.time.toMillis() > b.time.toMillis()) return -1;
+    if (a.time.toMillis() < b.time.toMillis()) return 1;
+  });
   return (
     <section className={classes.memories}>
-      {memories.map((each) => (
+      {copyofMemories.map((each) => (
         <MemoryCard
           key={each.id}
           time={each.time}

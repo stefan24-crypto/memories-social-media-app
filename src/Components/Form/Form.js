@@ -4,9 +4,10 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../../store/data-slice";
+import { addDoc, collection } from "@firebase/firestore";
+import { db } from "../../firebase";
 
 const Form = () => {
-  //Use useReducer Instead
   const [creator, setCreator] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -14,6 +15,7 @@ const Form = () => {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const memoriesCollection = collection(db, "memories");
 
   const changeCreator = (e) => setCreator(e.target.value);
   const changeTitle = (e) => setTitle(e.target.value);
@@ -27,7 +29,7 @@ const Form = () => {
   const cancelHandler = () => {
     navigate("/");
   };
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const data = {
       id: Math.random().toString(),
@@ -35,12 +37,13 @@ const Form = () => {
       message: message,
       creator: creator,
       image: image,
-      time: new Date().toISOString(),
+      time: new Date(),
       comments: [],
       likes: 0,
       tags: tags,
     };
     dispatch(dataActions.addMemory(data));
+    await addDoc(memoriesCollection, data);
     navigate("/");
   };
   return (

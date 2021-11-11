@@ -7,6 +7,8 @@ import moment from "moment";
 import Comment from "./Comment";
 import { TextField } from "@mui/material";
 import { dataActions } from "../../store/data-slice";
+import { db } from "../../firebase";
+import { doc, updateDoc } from "@firebase/firestore";
 
 const MemoryDetail = ({ id }) => {
   //Variables Needed
@@ -18,13 +20,23 @@ const MemoryDetail = ({ id }) => {
 
   //Functions
   const commentChange = (e) => setComment(e.target.value);
-  const addCommentHandler = (e) => {
+
+  const addCommentHandler = async (e) => {
     e.preventDefault();
-    dispatch(dataActions.addComment({ id: id, comment: comment }));
+    const userDoc = doc(db, "memories", id);
+    const newFields = {
+      comments: [
+        { id: Math.random().toString(), text: comment },
+        ...thisMemory.comments,
+      ],
+    };
+    await updateDoc(userDoc, newFields);
     setComment("");
   };
-  const addLikeHandler = () => {
-    dispatch(dataActions.addLike(id));
+  const addLikeHandler = async () => {
+    const userDoc = doc(db, "memories", id);
+    const newFileds = { likes: thisMemory.likes + 1 };
+    await updateDoc(userDoc, newFileds);
   };
 
   return (
